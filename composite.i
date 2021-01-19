@@ -83,85 +83,37 @@
 []
 
 [Constraints]
-  [botright_x]
-    type = EqualValuePlusConstant
-    variable = disp_x
-    function = Fxxt
-    primary = '0'
-    secondary_node_ids = '304'
-    penalty = 1e+06
-  []
-  [botright_y]
-    type = EqualValuePlusConstant
-    variable = disp_y
-    function = Fyxt
-    primary = '0'
-    secondary_node_ids = '304'
-    penalty = 1e+06
-  []
-  [topleft_x]
-    type = EqualValuePlusConstant
-    variable = disp_x
-    function = Fxyt
-    primary = '0'
-    secondary_node_ids = '927'
-    penalty = 1e+06
-  []
-  [topleft_y]
-    type = EqualValuePlusConstant
-    variable = disp_y
-    function = Fyyt
-    primary = '0'
-    secondary_node_ids = '927'
-    penalty = 1e+06
-  []
-  [topright_x]
-    type = EqualValuePlusConstant
-    variable = disp_x
-    function = Fxyt
-    primary = '304'
-    secondary_node_ids = '623'
-    penalty = 1e+06
-  []
-  [topright_y]
-    type = EqualValuePlusConstant
-    variable = disp_y
-    function = Fyyt
-    primary = '304'
-    secondary_node_ids = '623'
-    penalty = 1e+06
-  []
   [topedge_x]
     type = EqualValuePlusConstant
     variable = disp_x
     function = Fxyt
-    primary  = '1 32 48 64 80 96 112 128 144 160 176 192 208 224 240 256 272 288'
-    secondary_node_ids = '911 895 879 863 847 831 815 799 783 767 751 735 719 703 687 671 655 639'
-    penalty = 1e+03
+    primary  = '0 1 32 48 64 80 96 112 128 144 160 176 192 208 224 240 256 272 288'
+    secondary_node_ids = '927 911 895 879 863 847 831 815 799 783 767 751 735 719 703 687 671 655 639'
+    penalty = 1e+06
   []
   [topedge_y]
     type = EqualValuePlusConstant
     variable = disp_y
     function = Fyyt
-    primary  = '1 32 48 64 80 96 112 128 144 160 176 192 208 224 240 256 272 288'
-    secondary_node_ids = '911 895 879 863 847 831 815 799 783 767 751 735 719 703 687 671 655 639'
-    penalty = 1e+03
+    primary  = '0 1 32 48 64 80 96 112 128 144 160 176 192 208 224 240 256 272 288'
+    secondary_node_ids = '927 911 895 879 863 847 831 815 799 783 767 751 735 719 703 687 671 655 639'
+    penalty = 1e+06
   []
   [rightedge_x]
     type = EqualValuePlusConstant
     variable = disp_x
     function = Fxxt
-    primary  = '1215 1199 1183 1167 1151 1135 1119 1103 1087 1071 1055 1039 1023 1007 991 975 959 943'
-    secondary_node_ids = '335 351 367 383 399 415 431 447 463 479 495 511 527 543 559 575 591 607'
-    penalty = 1e+03
+    primary  = '0 1215 1199 1183 1167 1151 1135 1119 1103 1087 1071 1055 1039 1023 1007 991 975 959 943 927'
+    secondary_node_ids = '304 335 351 367 383 399 415 431 447 463 479 495 511 527 543 559 575 591 607 623'
+    penalty = 1e+06
   []
   [rightedge_y]
     type = EqualValuePlusConstant
     variable = disp_y
     function = Fyxt
-    primary  = '1215 1199 1183 1167 1151 1135 1119 1103 1087 1071 1055 1039 1023 1007 991 975 959 943'
-    secondary_node_ids = '335 351 367 383 399 415 431 447 463 479 495 511 527 543 559 575 591 607'
-    penalty = 1e+03
+    primary  = '0 1215 1199 1183 1167 1151 1135 1119 1103 1087 1071 1055 1039 1023 1007 991 975 959 943 927'
+    secondary_node_ids = '304 335 351 367 383 399 415 431 447 463 479 495 511 527 543 559 575 591 607 623'
+    penalty = 1e+06
   []
 []
 
@@ -205,7 +157,7 @@
 
   end_time = 1.0
   nl_rel_tol = 1e-6
-  nl_max_its = 15
+  nl_max_its = 50
   [./TimeStepper]
     type = IterationAdaptiveDT
     optimal_iterations = 7
