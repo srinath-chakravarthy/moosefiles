@@ -87,17 +87,17 @@
     type = EqualValuePlusConstant
     variable = disp_x
     function = Fxyt
-    primary  = '0 1 32 48 64 80 96 112 128 144 160 176 192 208 224 240 256 272 288'
-    secondary_node_ids = '927 911 895 879 863 847 831 815 799 783 767 751 735 719 703 687 671 655 639'
-    penalty = 1e+06
+    primary  = '0 1 32 48 64 80 96 112 128 144 160 176 192 208 224 240 256 272 288 304'
+    secondary_node_ids = '927 911 895 879 863 847 831 815 799 783 767 751 735 719 703 687 671 655 639 623'
+    penalty = 1e+03
   []
   [topedge_y]
     type = EqualValuePlusConstant
     variable = disp_y
     function = Fyyt
-    primary  = '0 1 32 48 64 80 96 112 128 144 160 176 192 208 224 240 256 272 288'
-    secondary_node_ids = '927 911 895 879 863 847 831 815 799 783 767 751 735 719 703 687 671 655 639'
-    penalty = 1e+06
+    primary  = '0 1 32 48 64 80 96 112 128 144 160 176 192 208 224 240 256 272 288 304'
+    secondary_node_ids = '927 911 895 879 863 847 831 815 799 783 767 751 735 719 703 687 671 655 639 623'
+    penalty = 1e+03
   []
   [rightedge_x]
     type = EqualValuePlusConstant
@@ -105,7 +105,7 @@
     function = Fxxt
     primary  = '0 1215 1199 1183 1167 1151 1135 1119 1103 1087 1071 1055 1039 1023 1007 991 975 959 943 927'
     secondary_node_ids = '304 335 351 367 383 399 415 431 447 463 479 495 511 527 543 559 575 591 607 623'
-    penalty = 1e+06
+    penalty = 1e+03
   []
   [rightedge_y]
     type = EqualValuePlusConstant
@@ -113,18 +113,18 @@
     function = Fyxt
     primary  = '0 1215 1199 1183 1167 1151 1135 1119 1103 1087 1071 1055 1039 1023 1007 991 975 959 943 927'
     secondary_node_ids = '304 335 351 367 383 399 415 431 447 463 479 495 511 527 543 559 575 591 607 623'
-    penalty = 1e+06
+    penalty = 1e+03
   []
 []
 
 [Kernels]
   [./x]
-    type = ADStressDivergenceTensors
+    type = StressDivergenceTensors
     variable = disp_x
     component = 0
   [../]
   [./y]
-    type = ADStressDivergenceTensors
+    type = StressDivergenceTensors
     variable = disp_y
     component = 1
   [../]
@@ -132,20 +132,23 @@
 
 [Materials]
   [./strain]
-    type = ADComputeDeformationGradient
+    type = ComputeSmallStrain
   [../]
-  [./stress_mat]
-    type = ADComputeHyper
-    C1 = 1.0
-    D1 = 1.0
+  [elasticity_mat]
+    type = ComputeIsotropicElasticityTensor
+    youngs_modulus = 100
+    poissons_ratio = 0.
     block = 'matrix'
-  [../]
-  [./stress_fib]
-    type = ADComputeHyper
-    C1 = 100
-    D1 = 100
+  []
+  [elasticity_fib]
+    type = ComputeIsotropicElasticityTensor
+    youngs_modulus = 1000
+    poissons_ratio = 0.
     block = 'fiber'
-  [../]
+  []
+  [stress]
+    type = ComputeLinearElasticStress
+  []
 []
 
 
