@@ -20,108 +20,26 @@
     x = '0. 0.5 1 '
     y = '0 0.3 0'
   [../]
-  [./Exy]
-    type = PiecewiseLinear
-    x = '0 1'
-    y = '0 0' 
-  [../]
-  [./Eyy]
-    type = PiecewiseLinear
-    x = '0 1'
-    y = '0 0' 
-  [../]
-  [./bot_displacement_x]
-    type = ParsedFunction
-    value = Exx*x
-    vars = 'Exx'
-    vals = 'Exx'
-  [../]
-  [./bot_displacement_y]
-    type = ParsedFunction
-    value = Exy*x
-    vars = 'Exy'
-    vals = 'Exy'
-  [../]
-  [./left_displacement_x]
-    type = ParsedFunction
-    value = Exy*y
-    vars = 'Exy'
-    vals = 'Exy'
-  [../]
-  [./left_displacement_y]
-    type = ParsedFunction
-    value = Eyy*y
-    vars = 'Eyy'
-    vals = 'Eyy'
-  [../]
-  [./top_displacement_x]
-    type = ParsedFunction
-    value = Exx*x+Exy
-    vars = 'Exx Exy'
-    vals = 'Exx Exy'
-  [../]
-  [./top_displacement_y]
-    type = ParsedFunction
-    value = Exy*x+Eyy
-    vars = 'Exy Eyy'
-    vals = 'Exy Eyy'
-  [../]
   [./right_displacement_x]
     type = ParsedFunction
-    value = Exx+Exy*y
-    vars = 'Exx Exy'
-    vals = 'Exx Exy'
-  [../]
-  [./right_displacement_y]
-    type = ParsedFunction
-    value = Exy+Eyy*y
-    vars = 'Exy Eyy'
-    vals = 'Exy Eyy'
+    value = Exx
+    vars = 'Exx'
+    vals = 'Exx'
   [../]
 []
 
 [BCs]
-  [./bottom_x]
-    type = FunctionDirichletBC
-    variable = 'disp_x'
-    boundary = bottom
-    function = bot_displacement_x
-    preset   = false
-  [../]
-  [./bottom_y]
-    type = FunctionDirichletBC
-    variable = 'disp_y'
-    boundary = bottom
-    function = bot_displacement_y
-    preset   = false
-  [../]
   [./left_x]
-    type = FunctionDirichletBC
+    type = DirichletBC
     variable = 'disp_x'
     boundary = left
-    function = left_displacement_x
-    preset   = false
+    value = 0
   [../]
   [./left_y]
-    type = FunctionDirichletBC
+    type = DirichletBC
     variable = 'disp_y'
     boundary = left
-    function = left_displacement_y
-    preset   = false
-  [../]
-  [./top_x]
-    type = FunctionDirichletBC
-    variable = 'disp_x'
-    boundary = top
-    function = top_displacement_x
-    preset   = false
-  [../]
-  [./top_y]
-    type = FunctionDirichletBC
-    variable = 'disp_y'
-    boundary = top
-    function = top_displacement_y
-    preset   = false
+    value = 0
   [../]
   [./right_x]
     type = FunctionDirichletBC
@@ -131,11 +49,10 @@
     preset   = false
   [../]
   [./right_y]
-    type = FunctionDirichletBC
+    type = DirichletBC
     variable = 'disp_y'
     boundary = right
-    function = right_displacement_y
-    preset   = false
+    value = 0
   [../]
 []
 
@@ -156,6 +73,7 @@
   [./strain]
     type = ComputeIncrementalSmallStrain
   [../]
+  
   [./elasticity_tensor_matrix]
     type = ComputeIsotropicElasticityTensor
     block = 'matrix'
@@ -198,9 +116,6 @@
   nl_rel_tol = 1e-20
   nl_max_its = 200
   dt = 0.01
-
-  petsc_options_iname = '-pc_type -pc_factor_mat_solver_package'
-  petsc_options_value = 'lu superlu_dist'
 []
 
 
